@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
 	"os"
 	"strings"
 
@@ -99,6 +100,9 @@ func NewRootCmd() *cobra.Command {
 			return server.InterceptConfigsPreRunHandler(cmd, customAppTemplate, customAppConfig, customCMTConfig)
 		},
 	}
+	rootCmd.AddCommand(
+		cli.ValidateGenesisCmd(nil),
+	)
 
 	// Since the IBC modules don't support dependency injection, we need to
 	// manually register the modules on the client side.
